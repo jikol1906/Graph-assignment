@@ -10,13 +10,14 @@ import java.util.Scanner;
  */
 public class RunProgram {
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotgFoundException {
 
         Scanner userInput = new Scanner(System.in);
 
         System.out.println("Please enter name of file.");
+        System.out.println();
 
-        String fileName = "graph1.txt";
+        String fileName = userInput.next();
 
         Scanner input = new Scanner(new File(fileName));
 
@@ -39,14 +40,22 @@ public class RunProgram {
             }
         }
 
-
+        //Construct a new graph with the given vertices and edges;
         Graph<Integer> g = new UnweightedGraph<>(adjMatrix,vertices);
+
+        g.printEdges();
 
         AbstractGraph.Tree t = g.dfs(0);
 
-        System.out.println(t.getSearchOrder());
+        System.out.println(isConnected(t,g));
 
 
+
+    }
+
+    public static <V> boolean isConnected (AbstractGraph.Tree t, Graph<V> g) {
+
+        return t.getNumberOfVerticesFound() == g.getSize();
 
     }
 
