@@ -53,9 +53,13 @@ public class RunProgram {
 
     }
 
-    public static <V> boolean isConnected (AbstractGraph.Tree t, Graph<V> g) {
+    public static <V> String isConnected (AbstractGraph.Tree t, Graph<V> g) {
 
-        return t.getNumberOfVerticesFound() == g.getSize();
+        if(t.getNumberOfVerticesFound() == g.getSize()) {
+            return "Graph is connected";
+        } else {
+            return "Graph is not connected";
+        }
 
     }
 
