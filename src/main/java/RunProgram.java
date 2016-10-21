@@ -10,7 +10,7 @@ import java.util.Scanner;
  */
 public class RunProgram {
 
-    public static void main(String[] args) throws FileNotgFoundException {
+    public static void main(String[] args) throws FileNotFoundException {
 
         Scanner userInput = new Scanner(System.in);
 
