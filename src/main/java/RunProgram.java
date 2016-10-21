@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -8,17 +10,43 @@ import java.util.Scanner;
  */
 public class RunProgram {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
 
         Scanner userInput = new Scanner(System.in);
 
-        String fileName = userInput.next();
+        System.out.println("Please enter name of file.");
 
-        try {
-            Scanner input = new Scanner(new File(fileName));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        String fileName = "graph1.txt";
+
+        Scanner input = new Scanner(new File(fileName));
+
+        int NumOfVertices = input.nextInt();
+        input.nextLine();
+
+        //array to store vertices
+        Integer[] vertices = new Integer[NumOfVertices];
+
+        //Makes an adjacency matrix with size NumOfVertices x NumOfVertices
+        int[][] adjMatrix = new int[NumOfVertices][NumOfVertices];
+
+        //Reads data from file into vertices and adjmatrix
+        for (int row = 0; row < adjMatrix.length; row++) {
+            Scanner lineScan = new Scanner(input.nextLine());
+            vertices[row] = lineScan.nextInt();
+            while (lineScan.hasNextInt()) {
+                int edge = lineScan.nextInt();
+                adjMatrix[row][edge] = 1;
+            }
         }
+
+
+        Graph<Integer> g = new UnweightedGraph<>(adjMatrix,vertices);
+
+        AbstractGraph.Tree t = g.dfs(0);
+
+        System.out.println(t.getSearchOrder());
+
+
 
     }
 
